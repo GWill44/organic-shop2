@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "organic-e6541": {
+      "hosting": {
+        "organic-shop2": [
+          "organic-e6541"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "organic-e6541"
+  }
+}
