@@ -13,6 +13,6 @@ export class NavbarComponent  {
   }
 
   logout() {
-    this.afAuth.signOut();
+    this.afAuth.signOut(); //Wrong credentials.
   }
 }
