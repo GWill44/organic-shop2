@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from "@angular/fire/compat/auth";
-import {GoogleAuthProvider, user} from "@angular/fire/auth";
+import {GoogleAuthProvider} from "@angular/fire/auth";
 import firebase from "firebase/compat";
 import {Observable} from "rxjs";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 
 
 @Injectable({
@@ -12,7 +12,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 export class AuthService {
   user$: Observable<firebase.User | null>;
 
-  constructor(private afAuth: AngularFireAuth, private route: ActivatedRoute, private router: Router) {
+  constructor(private afAuth: AngularFireAuth, private route: ActivatedRoute) {
     this.user$ = afAuth.authState;
   }
 
@@ -23,7 +23,7 @@ export class AuthService {
   }
 
   logout(){
-    this.afAuth.signOut();
+    void this.afAuth.signOut();
   }
 
 }
