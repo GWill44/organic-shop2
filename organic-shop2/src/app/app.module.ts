@@ -1,8 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { RouterModule } from "@angular/router";
+import { AngularFireModule } from "@angular/fire/compat";
+import { AngularFireAuthModule } from "@angular/fire/compat/auth";
+import { FormsModule } from "@angular/forms";
 
 import { AppComponent } from './app.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { ProductsComponent } from './products/products.component';
@@ -12,18 +16,17 @@ import { OrderSuccessComponent } from './order-success/order-success.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
-import { RouterModule } from "@angular/router";
 import { LoginComponent } from './login/login.component';
-import { environment } from '../environments/environment';
-import {AngularFireModule} from "@angular/fire/compat";
-import {AngularFireAuthModule} from "@angular/fire/compat/auth";
-import {AuthService} from "./auth.service";
-import {AuthGuard} from "./auth-guard.service";
-import {UserService} from "./user.service";
-import {AdminAuthGuard} from "./admin-auth-guard.service";
 import { ProductFormComponent } from './admin/product-form/product-form.component';
-import {CategoryService} from "./category.service";
 
+import { AuthService } from "./auth.service";
+import { AuthGuard } from "./auth-guard.service";
+import { UserService } from "./user.service";
+import { AdminAuthGuard } from "./admin-auth-guard.service";
+import { CategoryService } from "./category.service";
+
+import { environment } from '../environments/environment';
+import {ProductService} from "./product.service";
 
 @NgModule({
   declarations: [
@@ -43,6 +46,7 @@ import {CategoryService} from "./category.service";
   imports: [
     BrowserModule,
     NgbModule,
+    FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
       { path: 'products', component: ProductsComponent },
@@ -76,7 +80,8 @@ import {CategoryService} from "./category.service";
     AuthGuard,
     AdminAuthGuard,
     UserService,
-    CategoryService
+    CategoryService,
+    ProductService
   ],
   bootstrap: [AppComponent]
 })
