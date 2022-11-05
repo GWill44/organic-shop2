@@ -33,7 +33,7 @@ export class ProductFormComponent {
 
   save(product: Object){
     this.productService.create(product);
-    this.router.navigate(['/admin/products']);
+    this.router.navigate(['/admin/products'])
   }
 
   get title(){ return this.form.get('title'); }
