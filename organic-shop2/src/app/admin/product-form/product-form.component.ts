@@ -39,15 +39,15 @@ export class ProductFormComponent {
       }));
   }
 
-  ngOnInit() {}
-
   save(product: Object){
-    let id = this.getID();
-    if(id != ''){
-      this.productService.update(id, product);
-    } else {
+    (this.getID() != '') ?
+      this.productService.update(this.getID(), product) :
       this.productService.create(product);
-    }
+    this.router.navigate(['/admin/products']);
+  }
+  delete(){
+    if(!confirm("Are you sure you wish to delete this product?")) return;
+    this.productService.delete(this.getID());
     this.router.navigate(['/admin/products']);
   }
 

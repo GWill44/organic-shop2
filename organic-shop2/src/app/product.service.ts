@@ -22,4 +22,7 @@ export class ProductService {
   update(productId: string, product: Object){
     void this.db.object('/products/' + productId).update(product);
   }
+  delete(productId: string){
+    void this.db.object('/products/' + productId).remove();
+  }
 }
