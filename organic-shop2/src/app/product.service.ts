@@ -13,6 +13,9 @@ export class ProductService {
      this.db.list('/products').push(product);
   }
   getAll() : Observable<any> {
-    return this.db.list('/products').valueChanges();
+    return this.db.list('/products').snapshotChanges();
+  }
+  get(productId: string) : Observable<any>{
+    return this.db.object('/products/' + productId).valueChanges();
   }
 }

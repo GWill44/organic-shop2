@@ -14,6 +14,9 @@ export class AdminProductsComponent implements OnInit {
     private productService: ProductService) {
 
     this.products$ = this.productService.getAll();
+    this.products$.subscribe(
+      products => console.log(products)
+    );
   }
 
   ngOnInit(): void {

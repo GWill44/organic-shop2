@@ -2,7 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {CategoryService} from "../../category.service";
 import {ProductService} from "../../product.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
+import {take, tap} from 'rxjs/operators';
+import {Product} from "../../models/product";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-product-form',
@@ -11,9 +14,10 @@ import {Router} from "@angular/router";
 })
 export class ProductFormComponent {
   categories$;
+  product$: Observable<Product>;
   form = new FormGroup({
     title: new FormControl('', [Validators.required]),
-    price: new FormControl('', [Validators.required, Validators.min(0)]),
+    price: new FormControl(0, [Validators.required, Validators.min(0)]),
     category: new FormControl('', [Validators.required]),
     imageUrl: new FormControl('',[Validators.required])
     // imageUrl validator removed until functioning pattern. Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')
@@ -21,19 +25,34 @@ export class ProductFormComponent {
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private categoryService: CategoryService,
     private productService: ProductService) {
 
     this.categories$ = this.categoryService.getCategories();
+
+    this.product$ = productService.get(this.getID()).pipe(
+      tap((product: Product) => {
+        this.form.controls.title.setValue(product.title);
+        this.form.controls.price.setValue(product.price);
+        this.form.controls.category.setValue(product.category);
+        this.form.controls.imageUrl.setValue(product.imageUrl);
+      }))
+
+
   }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   save(product: Object){
     this.productService.create(product);
     this.router.navigate(['/admin/products'])
+  }
+
+  getID() {
+    let id = this.route.snapshot.paramMap.get('id');
+    console.log(id);
+    return (id ? id : '');
   }
 
   get title(){ return this.form.get('title'); }
