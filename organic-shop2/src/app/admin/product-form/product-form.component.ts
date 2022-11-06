@@ -1,11 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {CategoryService} from "../../category.service";
 import {ProductService} from "../../product.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
-import {take, tap} from 'rxjs/operators';
+import {Observable, tap} from "rxjs";
 import {Product} from "../../models/product";
-import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-product-form',
@@ -37,21 +36,23 @@ export class ProductFormComponent {
         this.form.controls.price.setValue(product.price);
         this.form.controls.category.setValue(product.category);
         this.form.controls.imageUrl.setValue(product.imageUrl);
-      }))
-
-
+      }));
   }
 
   ngOnInit() {}
 
   save(product: Object){
-    this.productService.create(product);
-    this.router.navigate(['/admin/products'])
+    let id = this.getID();
+    if(id != ''){
+      this.productService.update(id, product);
+    } else {
+      this.productService.create(product);
+    }
+    this.router.navigate(['/admin/products']);
   }
 
   getID() {
     let id = this.route.snapshot.paramMap.get('id');
-    console.log(id);
     return (id ? id : '');
   }
 
