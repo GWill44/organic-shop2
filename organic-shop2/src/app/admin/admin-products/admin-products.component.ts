@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ProductService} from "../../product.service";
-import {Subscription} from "rxjs";
+import {Subject, Subscription} from "rxjs";
 
 
 @Component({
@@ -10,19 +10,26 @@ import {Subscription} from "rxjs";
 })
 export class AdminProductsComponent implements OnInit, OnDestroy {
 
+
   products: any[] | undefined;
   filteredProducts: any[] | undefined;
-  productsSubscription!: Subscription;
+  productsSub!: Subscription;
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject<any>();
 
   constructor(
     private productService: ProductService) {
   }
 
   ngOnInit(): void {
-    this.productsSubscription =
-    this.productService.getAll().subscribe(products => {
-      this.products = products;
-      this.filteredProducts = products;
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 2
+    };
+    this.productsSub =
+      this.productService.getAll().subscribe(products => {
+        this.products = products;
+        this.dtTrigger.next(this.filteredProducts = products);
     });
   }
 
@@ -33,7 +40,8 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.productsSubscription.unsubscribe();
+    this.productsSub.unsubscribe();
+    this.dtTrigger.unsubscribe();
   }
 
 }

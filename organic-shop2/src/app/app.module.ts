@@ -27,6 +27,7 @@ import { CategoryService } from "./category.service";
 
 import { environment } from '../environments/environment';
 import {ProductService} from "./product.service";
+import {DataTablesModule} from "angular-datatables";
 
 @NgModule({
   declarations: [
@@ -43,44 +44,45 @@ import {ProductService} from "./product.service";
     LoginComponent,
     ProductFormComponent
   ],
-  imports: [
-    BrowserModule,
-    NgbModule,
-    FormsModule,
-    ReactiveFormsModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent },
-      { path: 'products', component: ProductsComponent },
-      { path: 'shopping-cart', component: ShoppingCartComponent },
-      { path: 'login', component: LoginComponent },
-      { path: 'check-out', component: CheckOutComponent, canActivate: [AuthGuard] },
-      { path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuard] },
-      { path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGuard] },
+    imports: [
+        BrowserModule,
+        NgbModule,
+        FormsModule,
+        ReactiveFormsModule,
+        RouterModule.forRoot([
+            {path: '', component: HomeComponent},
+            {path: 'products', component: ProductsComponent},
+            {path: 'shopping-cart', component: ShoppingCartComponent},
+            {path: 'login', component: LoginComponent},
+            {path: 'check-out', component: CheckOutComponent, canActivate: [AuthGuard]},
+            {path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuard]},
+            {path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGuard]},
 
-      {
-        path: 'admin/products/new',
-        component: ProductFormComponent,
-        canActivate: [AuthGuard, AdminAuthGuard]
-      },
-      {
-        path: 'admin/products/:id',
-        component: ProductFormComponent,
-        canActivate: [AuthGuard, AdminAuthGuard]
-      },
-      {
-        path: 'admin/products',
-        component: AdminProductsComponent,
-        canActivate: [AuthGuard, AdminAuthGuard]
-      },
-      {
-        path: 'admin/orders',
-        component: AdminOrdersComponent,
-        canActivate: [AuthGuard, AdminAuthGuard]
-      }
-    ]),
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule
-  ],
+            {
+                path: 'admin/products/new',
+                component: ProductFormComponent,
+                canActivate: [AuthGuard, AdminAuthGuard]
+            },
+            {
+                path: 'admin/products/:id',
+                component: ProductFormComponent,
+                canActivate: [AuthGuard, AdminAuthGuard]
+            },
+            {
+                path: 'admin/products',
+                component: AdminProductsComponent,
+                canActivate: [AuthGuard, AdminAuthGuard]
+            },
+            {
+                path: 'admin/orders',
+                component: AdminOrdersComponent,
+                canActivate: [AuthGuard, AdminAuthGuard]
+            }
+        ]),
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFireAuthModule,
+        DataTablesModule
+    ],
   providers: [
     AuthService,
     AuthGuard,
