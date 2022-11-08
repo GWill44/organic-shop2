@@ -4,7 +4,7 @@
 <p>
   <input #query (keyup)="filter(query.value)" type="text" class="form-control" placeholder="Search...">
 </p>
-<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered table-striped table-hover">
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered table-hover">
   <thead>
   <tr>
     <th>Title</th>
@@ -15,7 +15,7 @@
   <tbody>
   <tr *ngFor="let product of filteredProducts">
     <td>{{ product.payload.val().title }}</td>
-    <td>{{ product.payload.val().price }}</td>
+    <td>{{ product.payload.val().price | currency: 'USD'}}</td>
     <td><a [routerLink]="['/admin/products', product.key]">Edit</a></td>
   </tr>
   </tbody>
