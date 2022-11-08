@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ProductService} from "../product.service";
-import {Observable} from "rxjs";
+import {Observable, switchMap} from "rxjs";
 import {CategoryService} from "../category.service";
 import {ActivatedRoute} from "@angular/router";
-import {Product} from "../models/product";
 
 @Component({
   selector: 'app-products',
@@ -23,16 +22,18 @@ export class ProductsComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.productService.getAll().subscribe(products => this.products = products);
+    this.productService.getAll().pipe(
+      switchMap(products => {
+        this.products = products;
+        return this.route.queryParamMap;
+      }))
+      .subscribe(params => {
+        this.category = params.get('category');
+        this.filteredProducts = (this.category) ?
+          this.products.filter(p => p.payload.val().category === this.category) :
+          this.products;
+      });
     this.categories$ = this.categoryService.getAll();
-
-    this.route.queryParamMap.subscribe(params => {
-      this.category = params.get('category');
-      this.filteredProducts = (this.category) ?
-        this.products.filter(p => p.payload.val().category === this.category) :
-        this.products;
-    })
-    console.log(this.filteredProducts);
   }
 
 }
