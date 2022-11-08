@@ -28,6 +28,7 @@ import { CategoryService } from "./category.service";
 import { environment } from '../environments/environment';
 import {ProductService} from "./product.service";
 import {DataTablesModule} from "angular-datatables";
+import { StoreComponent } from './store/store.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import {DataTablesModule} from "angular-datatables";
     AdminProductsComponent,
     AdminOrdersComponent,
     LoginComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    StoreComponent
   ],
     imports: [
         BrowserModule,
@@ -51,6 +53,7 @@ import {DataTablesModule} from "angular-datatables";
         ReactiveFormsModule,
         RouterModule.forRoot([
             {path: '', component: HomeComponent},
+            {path: 'store', component: ProductsComponent},
             {path: 'products', component: ProductsComponent},
             {path: 'shopping-cart', component: ShoppingCartComponent},
             {path: 'login', component: LoginComponent},
