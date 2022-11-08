@@ -28,7 +28,7 @@ export class ProductFormComponent {
     private categoryService: CategoryService,
     private productService: ProductService) {
 
-    this.categories$ = this.categoryService.getCategories();
+    this.categories$ = this.categoryService.getAll();
 
     this.product$ = productService.get(this.getID()).pipe(
       tap((product: Product) => {
