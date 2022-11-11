@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ProductService} from "../../product.service";
 import {Subject, Subscription} from "rxjs";
+import {Product} from "../../models/product";
 
 
 @Component({
@@ -10,9 +11,8 @@ import {Subject, Subscription} from "rxjs";
 })
 export class AdminProductsComponent implements OnInit, OnDestroy {
 
-
-  products: any[] | undefined;
-  filteredProducts: any[] | undefined;
+  products: Product[] | undefined;
+  filteredProducts: Product[] | undefined;
   productsSub!: Subscription;
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
@@ -36,7 +36,7 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
 
   filter(query: string){
     this.filteredProducts = (query) ?
-      this.products!.filter((p: any) => p.payload.val().title.toLowerCase().includes(query.toLowerCase())) :
+      this.products!.filter((p: Product) => p.title.toLowerCase().includes(query.toLowerCase())) :
       this.products;
   }
 

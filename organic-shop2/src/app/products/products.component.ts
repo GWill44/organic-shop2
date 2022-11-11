@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ProductService} from "../product.service";
 import {switchMap} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
+import {Product} from "../models/product";
 
 @Component({
   selector: 'app-products',
@@ -9,8 +10,8 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
-  products: any[] = [];
-  filteredProducts: any[] = [];
+  products: Product[] = [];
+  filteredProducts: Product[] = [];
   category: string | null | undefined;
 
   constructor(
@@ -27,7 +28,7 @@ export class ProductsComponent implements OnInit {
       .subscribe(params => {
         this.category = params.get('category');
         this.filteredProducts = (this.category) ?
-          this.products.filter(p => p.payload.val().category === this.category) :
+          this.products.filter(p => p.category === this.category) :
           this.products;
       });
   }

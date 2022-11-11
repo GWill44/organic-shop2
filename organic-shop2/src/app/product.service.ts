@@ -1,20 +1,30 @@
 import { Injectable } from '@angular/core';
 import {AngularFireDatabase} from "@angular/fire/compat/database";
-import {Observable, Subscription} from "rxjs";
+import {Observable, of, switchMap, tap} from "rxjs";
 import {Product} from "./models/product";
+import {ProductMapperService} from "./product-mapper.service";
+import {map} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  constructor(private db: AngularFireDatabase) { }
+  constructor(
+    private db: AngularFireDatabase,
+    private productMapper: ProductMapperService) { }
 
   create(product: Object) {
      this.db.list('/products').push(product);
   }
-  getAll() : Observable<any> {
-    return this.db.list('/products').snapshotChanges();
+  getAll() : Observable<Product[]> {
+    return this.db.list('/products').snapshotChanges().pipe(
+      tap(console.log),
+      map(dbProducts => {
+        let mappedProd = this.productMapper.mapToProducts(dbProducts);
+        console.log(mappedProd)
+        return mappedProd
+      }));
   }
   get(productId: string) : Observable<any>{
     return this.db.object('/products/' + productId).valueChanges();
