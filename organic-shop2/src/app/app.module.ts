@@ -30,6 +30,7 @@ import {ProductService} from "./product.service";
 import {DataTablesModule} from "angular-datatables";
 import { StoreComponent } from './store/store.component';
 import { ProductFilterComponent } from './products/product-filter/product-filter.component';
+import { ProductCardComponent } from './product-card/product-card.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { ProductFilterComponent } from './products/product-filter/product-filter
     LoginComponent,
     ProductFormComponent,
     StoreComponent,
-    ProductFilterComponent
+    ProductFilterComponent,
+    ProductCardComponent
   ],
     imports: [
         BrowserModule,
