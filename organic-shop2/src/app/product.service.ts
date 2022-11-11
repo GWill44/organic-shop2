@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {AngularFireDatabase} from "@angular/fire/compat/database";
-import {Observable, of, switchMap, tap} from "rxjs";
+import {Observable, tap} from "rxjs";
 import {Product} from "./models/product";
 import {ProductMapperService} from "./product-mapper.service";
 import {map} from "rxjs/operators";
@@ -21,7 +21,7 @@ export class ProductService {
     return this.db.list('/products').snapshotChanges().pipe(
       tap(console.log),
       map(dbProducts => {
-        let mappedProd = this.productMapper.mapToProducts(dbProducts);
+        let mappedProd = this.productMapper.mapDbToProducts(dbProducts);
         console.log(mappedProd)
         return mappedProd
       }));

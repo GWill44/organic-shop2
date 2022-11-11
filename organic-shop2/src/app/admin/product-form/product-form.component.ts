@@ -5,6 +5,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Observable, tap} from "rxjs";
 import {Product} from "../../models/product";
+import {ProductMapperService} from "../../product-mapper.service";
 
 @Component({
   selector: 'app-product-form',
@@ -26,7 +27,8 @@ export class ProductFormComponent {
     private router: Router,
     private route: ActivatedRoute,
     private categoryService: CategoryService,
-    private productService: ProductService) {
+    private productService: ProductService,
+    public productMapper: ProductMapperService) {
 
     this.categories$ = this.categoryService.getAll();
 

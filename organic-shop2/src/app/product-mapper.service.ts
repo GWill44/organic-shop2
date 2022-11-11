@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Product} from "./models/product";
+import {FormGroup} from "@angular/forms";
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ export class ProductMapperService {
 
   constructor() { }
 
-  mapToProducts(dbProducts: any[]): Product[] {
+  mapDbToProducts(dbProducts: any[]): Product[] {
     let products: Product[] = [];
     debugger;
     for(let i = 0; i < dbProducts.length; i++) {
@@ -23,5 +24,15 @@ export class ProductMapperService {
       products.push(product);
     }
     return products;
+  }
+
+  mapFormToProduct(productForm: FormGroup): Product {
+    return {
+      title: productForm.controls?.['title'].value,
+      price: productForm.controls?.['price'].value,
+      category: productForm.controls?.['category'].value,
+      imageUrl: productForm.controls?.['imageUrl'].value,
+      key: undefined
+    };
   }
 }
