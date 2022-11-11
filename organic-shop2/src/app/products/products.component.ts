@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ProductService} from "../product.service";
-import {Observable, switchMap} from "rxjs";
-import {CategoryService} from "../category.service";
+import { switchMap } from "rxjs";
 import {ActivatedRoute} from "@angular/router";
 
 @Component({
@@ -12,13 +11,11 @@ import {ActivatedRoute} from "@angular/router";
 export class ProductsComponent implements OnInit {
   products: any[] = [];
   filteredProducts: any[] = [];
-  categories$: Observable<any> | undefined;
   category: string | null | undefined;
 
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
-    private categoryService: CategoryService
     ) { }
 
   ngOnInit(): void {
@@ -33,7 +30,6 @@ export class ProductsComponent implements OnInit {
           this.products.filter(p => p.payload.val().category === this.category) :
           this.products;
       });
-    this.categories$ = this.categoryService.getAll();
   }
 
 }

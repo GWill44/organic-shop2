@@ -29,6 +29,7 @@ import { environment } from '../environments/environment';
 import {ProductService} from "./product.service";
 import {DataTablesModule} from "angular-datatables";
 import { StoreComponent } from './store/store.component';
+import { ProductFilterComponent } from './products/product-filter/product-filter.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { StoreComponent } from './store/store.component';
     AdminOrdersComponent,
     LoginComponent,
     ProductFormComponent,
-    StoreComponent
+    StoreComponent,
+    ProductFilterComponent
   ],
     imports: [
         BrowserModule,
