@@ -19,12 +19,7 @@ export class ProductService {
   }
   getAll() : Observable<Product[]> {
     return this.db.list('/products').snapshotChanges().pipe(
-      tap(console.log),
-      map(dbProducts => {
-        let mappedProd = this.productMapper.mapDbToProducts(dbProducts);
-        console.log(mappedProd)
-        return mappedProd
-      }));
+      map(dbProducts => this.productMapper.mapDbToProducts(dbProducts)));
   }
   get(productId: string) : Observable<any>{
     return this.db.object('/products/' + productId).valueChanges();
