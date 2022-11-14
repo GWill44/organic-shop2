@@ -8,6 +8,7 @@ import {Product} from "../models/product";
 })
 export class ProductCardComponent {
   @Input('product') product : Product | undefined;
+  @Input('show-actions') showActions : Boolean = true;
 
   constructor() { }
 

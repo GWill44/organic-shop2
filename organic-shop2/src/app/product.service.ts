@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {AngularFireDatabase} from "@angular/fire/compat/database";
-import {Observable, tap} from "rxjs";
+import {Observable} from "rxjs";
 import {Product} from "./models/product";
 import {ProductMapperService} from "./product-mapper.service";
 import {map} from "rxjs/operators";

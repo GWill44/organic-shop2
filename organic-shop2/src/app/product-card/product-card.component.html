@@ -5,7 +5,7 @@
     <p class="card-text">{{product?.price | currency:'USD':true}}</p>
   </div>
   <div class="card-footer">
-    <a class="btn btn-primary block">Add to Cart</a>
+    <a *ngIf="showActions" class="btn btn-primary block">Add to Cart</a>
   </div>
 </div>
 

@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {CategoryService} from "../../category.service";
 import {ProductService} from "../../product.service";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Form, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Observable, tap} from "rxjs";
 import {Product} from "../../models/product";
@@ -47,6 +47,7 @@ export class ProductFormComponent {
       this.productService.create(product);
     this.router.navigate(['/admin/products']);
   }
+
   delete(){
     if(!confirm("Are you sure you wish to delete this product?")) return;
     this.productService.delete(this.getID());
@@ -56,6 +57,10 @@ export class ProductFormComponent {
   getID() {
     let id = this.route.snapshot.paramMap.get('id');
     return (id ? id : '');
+  }
+
+  mapFormToProduct(form: FormGroup): Product {
+    return this.productMapper.mapFormToProduct(form)
   }
 
   get title(){ return this.form.get('title'); }
