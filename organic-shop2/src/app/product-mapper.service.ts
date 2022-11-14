@@ -11,7 +11,6 @@ export class ProductMapperService {
 
   mapDbToProducts(dbProducts: any[]): Product[] {
     let products: Product[] = [];
-    debugger;
     for(let i = 0; i < dbProducts.length; i++) {
       let currentProduct = dbProducts[i].payload.val();
       let product: Product = {
