@@ -16,8 +16,12 @@ export class ProductCardComponent {
     private shoppingCartService: ShoppingCartService
   ) { }
 
-  addToCart(product: Product) {
-    void this.shoppingCartService.addToCart(product);
+  addToCart() {
+    this.shoppingCartService.addToCart(this.product!);
+  }
+
+  removeFromCart() {
+    this.shoppingCartService.removeFromCart(this.product!);
   }
 
   getQuantity() {
