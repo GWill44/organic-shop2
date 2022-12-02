@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {ShoppingCart} from "../models/shopping-cart";
 import {Observable} from "rxjs";
 import {ShoppingCartService} from "../shopping-cart.service";
-import {ProductService} from "../product.service";
 
 @Component({
   selector: 'app-shopping-cart',
