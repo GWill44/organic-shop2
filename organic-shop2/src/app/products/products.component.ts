@@ -4,6 +4,7 @@ import {Subscription, switchMap} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
 import {Product} from "../models/product";
 import {ShoppingCartService} from "../shopping-cart.service";
+import {ShoppingCart} from "../models/shopping-cart";
 
 @Component({
   selector: 'app-products',
@@ -14,7 +15,7 @@ export class ProductsComponent implements OnInit {
   products: Product[] = [];
   filteredProducts: Product[] = [];
   category: string | null | undefined;
-  cart: any;
+  cart: ShoppingCart | undefined;
   shoppingCartSub: Subscription | undefined;
 
   constructor(
