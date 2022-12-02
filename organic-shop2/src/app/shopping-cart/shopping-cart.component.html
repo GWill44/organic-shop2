@@ -1,42 +1,45 @@
 <h1>Shopping Cart</h1>
-<div class="row col-10" *ngIf="cart$ | async as cart">
-  <p>
-    You have {{cart.totalItemsCount}} in your shopping cart.
-  </p>
-  <table class="table">
-    <thead>
-    <tr>
-      <th></th>
-      <th>Product</th>
-      <th>Quantity</th>
-      <th>Price</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let item of cart.items">
-      <td><img [style.backgroundImage]="'url(' + item.imageUrl + ')'" class="thumbnail" alt=""></td>
-      <td>
-        {{item.title}}
-      </td>
-      <td>
-        <product-quantity [product]="item" [shopping-cart]="cart"></product-quantity>
-      </td>
-      <td>
-        {{item.totalPrice | currency:'USD':true}}
-      </td>
-    </tr>
-    </tbody>
-    <tfoot>
-    <tr>
-      <th></th>
-      <th></th>
-      <th>Total:</th>
-      <th>{{cart.totalPrice | currency:'USD':true}}</th>
-    </tr>
-    </tfoot>
-  </table>
+<div *ngIf="cart$ | async as cart">
+  <div class="row col-10">
+    <p>
+      You have {{cart.totalItemsCount}} in your shopping cart.
+      <button (click)= clearCart() class="btn btn-light btn-sm">
+        Clear Shopping Cart
+      </button>
+    </p>
+    <table class="table">
+      <thead>
+      <tr>
+        <th></th>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Price</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of cart.items">
+        <td><img [style.backgroundImage]="'url(' + item.imageUrl + ')'" class="thumbnail" alt=""></td>
+        <td>
+          {{item.title}}
+        </td>
+        <td>
+          <product-quantity [product]="item" [shopping-cart]="cart"></product-quantity>
+        </td>
+        <td>
+          {{item.totalPrice | currency:'USD':true}}
+        </td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <th></th>
+        <th></th>
+        <th>Total:</th>
+        <th>{{cart.totalPrice | currency:'USD':true}}</th>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+  <a *ngIf="cart.items.length"  routerLink="/check-out" class="btn btn-primary">Check Out</a>
 </div>
-<button (click)= clearCart() class="btn btn-danger btn-sm">
-  Clear Shopping Cart
-</button>
 
