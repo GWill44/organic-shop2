@@ -57,6 +57,7 @@
   <div class="col-md-6">
     <product-card [product]="mapFormToProduct(form)" [show-actions]="false"></product-card>
   </div>
+</div>
 
 <ng-template #newProduct>
   <form [formGroup]="form"  (ngSubmit)="save(form.value)">
