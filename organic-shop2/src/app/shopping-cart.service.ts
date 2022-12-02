@@ -49,12 +49,17 @@ export class ShoppingCartService {
   private async updateItem(product: Product, change: number) {
     let cartId = await this.getOrCreateCartId();
     let item$ = this.getItem(cartId, product.key!);
-    item$.valueChanges().pipe(take(1)).subscribe((item: any) =>
-      item$.update({
-        title: product.title,
-        imageUrl: product.imageUrl,
-        category: product.category,
-        price: product.price,
-        quantity: (item?.quantity || 0) + change}));
+    item$.valueChanges().pipe(
+      take(1)).subscribe((item: any) => {
+        let quantity = (item?.quantity || 0) + change;
+        if (quantity === 0) item$.remove();
+        else item$.update({
+          title: product.title,
+          imageUrl: product.imageUrl,
+          category: product.category,
+          price: product.price,
+          quantity: quantity
+        });
+    });
   }
 }
