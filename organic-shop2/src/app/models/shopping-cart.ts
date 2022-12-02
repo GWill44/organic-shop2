@@ -13,6 +13,7 @@ export class ShoppingCart {
         key: productId,
         title: item.title,
         imageUrl: item.imageUrl,
+        category: item.category,
         price: item.price,
         quantity: item.quantity
       }));

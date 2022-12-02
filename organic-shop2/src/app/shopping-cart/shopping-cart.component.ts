@@ -12,9 +12,13 @@ import {ProductService} from "../product.service";
 export class ShoppingCartComponent implements OnInit {
   cart$: Observable<ShoppingCart> | undefined;
 
-  constructor(private shoppingCartService: ShoppingCartService, private productService: ProductService) { }
+  constructor(private shoppingCartService: ShoppingCartService) { }
 
   async ngOnInit() {
     this.cart$ = await this.shoppingCartService.getCart();
+  }
+
+  clearCart(){
+    void this.shoppingCartService.clearCart();
   }
 }
