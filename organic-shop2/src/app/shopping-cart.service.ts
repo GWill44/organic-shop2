@@ -11,7 +11,7 @@ import {ShoppingCart} from "./models/shopping-cart";
 export class ShoppingCartService {
 
   constructor(
-    private db: AngularFireDatabase
+    private db: AngularFireDatabase,
   ) { }
 
   private create() {
@@ -22,8 +22,8 @@ export class ShoppingCartService {
 
   async getCart(): Promise<Observable<ShoppingCart>>{
     let cartId = await this.getOrCreateCartId();
-    return this.db.object('/shopping-carts/' + cartId).valueChanges()
-      .pipe(map((x: any) => new ShoppingCart(x.items)));
+    return this.db.object('/shopping-carts/' + cartId).valueChanges().pipe(
+      map((dbShoppingCart: any) => new ShoppingCart(dbShoppingCart.items)));
   }
 
   private getItem(cartId: string, productId: string) {

@@ -32,6 +32,7 @@ import { StoreComponent } from './store/store.component';
 import { ProductFilterComponent } from './products/product-filter/product-filter.component';
 import { ProductCardComponent } from './product-card/product-card.component';
 import {ShoppingCartService} from "./shopping-cart.service";
+import {ProductMapperService} from "./product-mapper.service";
 
 @NgModule({
   declarations: [
@@ -98,7 +99,8 @@ import {ShoppingCartService} from "./shopping-cart.service";
     UserService,
     CategoryService,
     ProductService,
-    ShoppingCartService
+    ShoppingCartService,
+    ProductMapperService
   ],
   bootstrap: [AppComponent]
 })
