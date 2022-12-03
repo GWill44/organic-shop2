@@ -1,12 +1,7 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Component, OnInit} from '@angular/core';
 import {ShoppingCartService} from "../shopping-cart.service";
 import {ShoppingCart} from "../models/shopping-cart";
-import {Shipping} from "../models/shipping";
-import {Subscription} from "rxjs";
-import {OrderService} from "../order.service";
-import {AuthService} from "../auth.service";
-import {Order} from "../models/order";
+import {Observable} from "rxjs";
 import {Router} from "@angular/router";
 
 @Component({
@@ -14,45 +9,14 @@ import {Router} from "@angular/router";
   templateUrl: './check-out.component.html',
   styleUrls: ['./check-out.component.css']
 })
-export class CheckOutComponent implements OnInit, OnDestroy {
-  cart: ShoppingCart | undefined;
-  userId: string | undefined;
-
-  form = new FormGroup({
-    name: new FormControl('', [Validators.required]),
-    addressLine1: new FormControl('', [Validators.required]),
-    addressLine2: new FormControl('', [Validators.required]),
-    city: new FormControl('',[Validators.required])
-  });
-
-  cartSubscription: Subscription | undefined;
-  authSubscription: Subscription | undefined;
+export class CheckOutComponent implements OnInit {
+  cart$: Observable<ShoppingCart> | undefined;
 
   constructor(
     private router: Router,
-    private authService: AuthService,
-    private shoppingCartService: ShoppingCartService,
-    private orderService: OrderService) { }
+    private shoppingCartService: ShoppingCartService) { }
 
   async ngOnInit() {
-    let cart$ = await this.shoppingCartService.getCart();
-    this.cartSubscription = cart$.subscribe(cart => this.cart = cart);
-    this.authSubscription = this.authService.user$.subscribe(user => this.userId = user?.uid);
-  }
-
-  async placeOrder() {
-    let order = new Order(this.userId!, new Shipping(this.form), this.cart!);
-    let result = await this.orderService.placeOrder(order);
-    this.router.navigate(['/order-success', result.key])
-  }
-
-  get name(){ return this.form.get('name'); }
-  get addressLine1(){ return this.form.get('addressLine1'); }
-  get addressLine2(){ return this.form.get('addressLine2'); }
-  get city(){ return this.form.get('city'); }
-
-  ngOnDestroy(): void {
-    this.cartSubscription?.unsubscribe();
-    this.authSubscription?.unsubscribe();
+    this.cart$ = await this.shoppingCartService.getCart();
   }
 }
