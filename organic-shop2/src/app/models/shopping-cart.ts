@@ -25,20 +25,6 @@ export class ShoppingCart {
     return (item) ? item.quantity : 0;
   }
 
-  mapCheckOutItems() {
-    return this.items.map(x => {
-      return {
-        product: {
-          title: x.title,
-          imageUrl: x.imageUrl,
-          price: x.price
-        },
-        quantity: x.quantity,
-        totalPrice: x.totalPrice
-      }
-    });
-  }
-
   get totalItemsCount() {
     let count = 0;
     for (let productId in this.itemsMap) count += this.itemsMap[productId].quantity!;

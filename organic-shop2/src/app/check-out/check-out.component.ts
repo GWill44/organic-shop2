@@ -5,6 +5,8 @@ import {ShoppingCart} from "../models/shopping-cart";
 import {Shipping} from "../models/shipping";
 import {Subscription} from "rxjs";
 import {OrderService} from "../order.service";
+import {AuthService} from "../auth.service";
+import {Order} from "../models/order";
 
 @Component({
   selector: 'app-check-out',
@@ -13,6 +15,7 @@ import {OrderService} from "../order.service";
 })
 export class CheckOutComponent implements OnInit, OnDestroy {
   cart: ShoppingCart | undefined;
+  userId: string | undefined;
   form = new FormGroup({
     name: new FormControl('', [Validators.required]),
     addressLine1: new FormControl('', [Validators.required]),
@@ -20,23 +23,29 @@ export class CheckOutComponent implements OnInit, OnDestroy {
     city: new FormControl('',[Validators.required])
   });
   cartSubscription: Subscription | undefined;
+  authSubscription: Subscription | undefined;
 
   constructor(
+    private authService: AuthService,
     private shoppingCartService: ShoppingCartService,
     private orderService: OrderService) { }
 
   async ngOnInit() {
     let cart$ = await this.shoppingCartService.getCart();
-    cart$.subscribe(cart => this.cart = cart);
+    this.cartSubscription = cart$.subscribe(cart => this.cart = cart);
+    this.authSubscription = this.authService.user$.subscribe(user => this.userId = user?.uid);
   }
 
   placeOrder() {
-    let order = {
-      datePlaced: new Date().getTime(),
-      shipping: new Shipping(this.form),
-      items: this.cart?.mapCheckOutItems()
-    }
-    this.orderService.storeOrder(order);
+    this.orderService.storeOrder(
+      new Order(this.userId!, new Shipping(this.form), this.cart!));
+    // let order = {
+    //   userId: this.userId,
+    //   datePlaced: new Date().getTime(),
+    //   shipping: new Shipping(this.form),
+    //   items: this.cart?.mapCheckOutItems()
+    // }
+    // this.orderService.storeOrder(order);
   }
 
   get name(){ return this.form.get('name'); }
@@ -46,5 +55,6 @@ export class CheckOutComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.cartSubscription?.unsubscribe();
+    this.authSubscription?.unsubscribe();
   }
 }
