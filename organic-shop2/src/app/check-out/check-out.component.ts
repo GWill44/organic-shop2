@@ -7,6 +7,7 @@ import {Subscription} from "rxjs";
 import {OrderService} from "../order.service";
 import {AuthService} from "../auth.service";
 import {Order} from "../models/order";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-check-out',
@@ -16,16 +17,19 @@ import {Order} from "../models/order";
 export class CheckOutComponent implements OnInit, OnDestroy {
   cart: ShoppingCart | undefined;
   userId: string | undefined;
+
   form = new FormGroup({
     name: new FormControl('', [Validators.required]),
     addressLine1: new FormControl('', [Validators.required]),
     addressLine2: new FormControl('', [Validators.required]),
     city: new FormControl('',[Validators.required])
   });
+
   cartSubscription: Subscription | undefined;
   authSubscription: Subscription | undefined;
 
   constructor(
+    private router: Router,
     private authService: AuthService,
     private shoppingCartService: ShoppingCartService,
     private orderService: OrderService) { }
@@ -36,16 +40,10 @@ export class CheckOutComponent implements OnInit, OnDestroy {
     this.authSubscription = this.authService.user$.subscribe(user => this.userId = user?.uid);
   }
 
-  placeOrder() {
-    this.orderService.storeOrder(
-      new Order(this.userId!, new Shipping(this.form), this.cart!));
-    // let order = {
-    //   userId: this.userId,
-    //   datePlaced: new Date().getTime(),
-    //   shipping: new Shipping(this.form),
-    //   items: this.cart?.mapCheckOutItems()
-    // }
-    // this.orderService.storeOrder(order);
+  async placeOrder() {
+    let order = new Order(this.userId!, new Shipping(this.form), this.cart!);
+    let result = await this.orderService.storeOrder(order);
+    this.router.navigate(['/order-success', result.key])
   }
 
   get name(){ return this.form.get('name'); }
