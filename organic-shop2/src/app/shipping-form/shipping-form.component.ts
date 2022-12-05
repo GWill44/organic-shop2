@@ -19,7 +19,7 @@ export class ShippingFormComponent implements OnInit, OnDestroy {
   form = new FormGroup({
     name: new FormControl('', [Validators.required]),
     addressLine1: new FormControl('', [Validators.required]),
-    addressLine2: new FormControl('', [Validators.required]),
+    addressLine2: new FormControl(''),
     city: new FormControl('',[Validators.required])
   });
 
