@@ -1,1 +1,23 @@
-<p>my-orders works!</p>
+<h1>Shopping Cart</h1>
+<div *ngIf="orders$ | async as orders">
+  <div class="row col-10">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Order</th>
+        <th>Date</th>
+        <th>Total</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let order of orders">
+        <td>{{orders.indexOf(order)}}</td>
+        <td>{{order.datePlaced | date}}</td>
+        <td>{{order.total | currency:'USD':true}}</td>
+        <td><a href="">View</a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
