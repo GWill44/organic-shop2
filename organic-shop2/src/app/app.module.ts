@@ -7,36 +7,35 @@ import { AngularFireAuthModule } from "@angular/fire/compat/auth";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { HomeComponent } from './home/home.component';
+import { NavbarComponent } from './core/components/navbar/navbar.component';
+import { HomeComponent } from './core/components/home/home.component';
 import { ProductsComponent } from './products/products.component';
-import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
-import { CheckOutComponent } from './check-out/check-out.component';
-import { OrderSuccessComponent } from './order-success/order-success.component';
-import { MyOrdersComponent } from './my-orders/my-orders.component';
-import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
-import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
-import { LoginComponent } from './login/login.component';
-import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { ShoppingCartComponent } from './shopping/components/shopping-cart/shopping-cart.component';
+import { CheckOutComponent } from './shopping/components/check-out/check-out.component';
+import { OrderSuccessComponent } from './shopping/components/order-success/order-success.component';
+import { MyOrdersComponent } from './shopping/components/my-orders/my-orders.component';
+import { AdminProductsComponent } from './admin/components/admin-products/admin-products.component';
+import { AdminOrdersComponent } from './admin/components/admin-orders/admin-orders.component';
+import { LoginComponent } from './core/components/login/login.component';
+import { ProductFormComponent } from './admin/components/product-form/product-form.component';
 
-import { AuthService } from "./auth.service";
-import { AuthGuard } from "./auth-guard.service";
-import { UserService } from "./user.service";
-import { AdminAuthGuard } from "./admin-auth-guard.service";
-import { CategoryService } from "./category.service";
+import { AuthService } from "./shared/services/auth.service";
+import { AuthGuard } from "./shared/services/auth-guard.service";
+import { UserService } from "./shared/services/user.service";
+import { AdminAuthGuard } from "./admin/services/admin-auth-guard.service";
+import { CategoryService } from "./shared/services/category.service";
 
 import { environment } from '../environments/environment';
-import {ProductService} from "./product.service";
+import {ProductService} from "./shared/services/product.service";
 import {DataTablesModule} from "angular-datatables";
-import { StoreComponent } from './store/store.component';
 import { ProductFilterComponent } from './products/product-filter/product-filter.component';
-import { ProductCardComponent } from './product-card/product-card.component';
-import {ShoppingCartService} from "./shopping-cart.service";
-import {ProductMapperService} from "./product-mapper.service";
-import { ProductQuantityComponent } from './product-quantity/product-quantity.component';
-import {OrderService} from "./order.service";
-import { ShoppingCartSummaryComponent } from './shopping-cart-summary/shopping-cart-summary.component';
-import { ShippingFormComponent } from './shipping-form/shipping-form.component';
+import { ProductCardComponent } from './shared/components/product-card/product-card.component';
+import {ShoppingCartService} from "./shared/services/shopping-cart.service";
+import {ProductMapperService} from "./shared/services/product-mapper.service";
+import { ProductQuantityComponent } from './shared/components/product-quantity/product-quantity.component';
+import {OrderService} from "./shared/services/order.service";
+import { ShoppingCartSummaryComponent } from './shopping/components/shopping-cart-summary/shopping-cart-summary.component';
+import { ShippingFormComponent } from './shopping/components/shipping-form/shipping-form.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +51,6 @@ import { ShippingFormComponent } from './shipping-form/shipping-form.component';
     AdminOrdersComponent,
     LoginComponent,
     ProductFormComponent,
-    StoreComponent,
     ProductFilterComponent,
     ProductCardComponent,
     ProductQuantityComponent,
