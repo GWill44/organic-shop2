@@ -20,35 +20,29 @@ import {DataTablesModule} from "angular-datatables";
 import {SharedModule} from "./shared/shared.module";
 import {AdminModule} from "./admin/admin.module";
 import {ShoppingModule} from "./shopping/shopping.module";
+import {CoreModule} from "./core/core.module";
 
 @NgModule({
   declarations: [
-    AppComponent,
-    NavbarComponent,
-    HomeComponent,
-    LoginComponent,
-
+    AppComponent
   ],
   imports: [
     BrowserModule,
     SharedModule,
     AdminModule,
     ShoppingModule,
-    ShoppingModule,
-        NgbModule,
-        FormsModule,
-        ReactiveFormsModule,
-        RouterModule.forRoot([
-            {path: '', component: HomeComponent},
-          {path: 'login', component: LoginComponent},
-        ]),
-        AngularFireModule.initializeApp(environment.firebase),
-        AngularFireAuthModule,
-        DataTablesModule
+    CoreModule,
+    NgbModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule.forRoot([]),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    DataTablesModule
     ],
-  providers: [
-
-  ],
-  bootstrap: [AppComponent]
+  providers: [],
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }
