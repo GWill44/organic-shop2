@@ -8,7 +8,6 @@ import {ShippingFormComponent} from "./components/shipping-form/shipping-form.co
 import {ShoppingCartComponent} from "./components/shopping-cart/shopping-cart.component";
 import {ShoppingCartSummaryComponent} from "./components/shopping-cart-summary/shopping-cart-summary.component";
 import {ProductFilterComponent} from "./components/products/product-filter/product-filter.component";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {RouterModule} from "@angular/router";
 import {AuthGuard} from "../shared/services/auth-guard.service";
 import {SharedModule} from "../shared/shared.module";
@@ -18,8 +17,6 @@ import {SharedModule} from "../shared/shared.module";
   imports: [
     CommonModule,
     SharedModule,
-    FormsModule,
-    ReactiveFormsModule,
     RouterModule.forChild([
       {path: 'products', component: ProductsComponent},
       {path: 'shopping-cart', component: ShoppingCartComponent},

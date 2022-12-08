@@ -1,11 +1,8 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
 import {ProductFormComponent} from "./components/product-form/product-form.component";
 import {AdminProductsComponent} from "./components/admin-products/admin-products.component";
 import {AdminOrdersComponent} from "./components/admin-orders/admin-orders.component";
 import {AdminAuthGuard} from "./services/admin-auth-guard.service";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {DataTablesModule} from "angular-datatables";
 import {SharedModule} from "../shared/shared.module";
 import {RouterModule} from "@angular/router";
 import {AuthGuard} from "../shared/services/auth-guard.service";
@@ -13,10 +10,6 @@ import {AuthGuard} from "../shared/services/auth-guard.service";
 
 @NgModule({
   imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    DataTablesModule,
     SharedModule,
     RouterModule.forChild([
       {

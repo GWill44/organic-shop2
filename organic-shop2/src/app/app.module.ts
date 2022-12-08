@@ -32,14 +32,9 @@ import {CoreModule} from "./core/core.module";
     AdminModule,
     ShoppingModule,
     CoreModule,
-    NgbModule,
-    FormsModule,
-    ReactiveFormsModule,
     RouterModule.forRoot([]),
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule,
-    DataTablesModule
-    ],
+  ],
   providers: [],
   bootstrap: [
     AppComponent

@@ -11,10 +11,19 @@ import {ProductService} from "./services/product.service";
 import {ShoppingCartService} from "./services/shopping-cart.service";
 import {OrderService} from "./services/order.service";
 import {ProductMapperService} from "./services/product-mapper.service";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {DataTablesModule} from "angular-datatables";
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    DataTablesModule,
+    NgbModule,
+    AngularFireAuthModule
   ],
   declarations: [
     ProductCardComponent,
@@ -33,7 +42,13 @@ import {ProductMapperService} from "./services/product-mapper.service";
   ],
   exports: [
     ProductCardComponent,
-    ProductQuantityComponent
+    ProductQuantityComponent,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    DataTablesModule,
+    NgbModule,
+    AngularFireAuthModule
   ]
 })
 export class SharedModule { }
