@@ -31,6 +31,7 @@ import {ProductFilterComponent} from './products/product-filter/product-filter.c
 import {ShoppingCartSummaryComponent} from './shopping/components/shopping-cart-summary/shopping-cart-summary.component';
 import {ShippingFormComponent} from './shopping/components/shipping-form/shipping-form.component';
 import {SharedModule} from "./shared/shared.module";
+import {AdminModule} from "./admin/admin.module";
 
 @NgModule({
   declarations: [
@@ -42,10 +43,9 @@ import {SharedModule} from "./shared/shared.module";
     CheckOutComponent,
     OrderSuccessComponent,
     MyOrdersComponent,
-    AdminProductsComponent,
-    AdminOrdersComponent,
+
     LoginComponent,
-    ProductFormComponent,
+
     ProductFilterComponent,
     ShoppingCartSummaryComponent,
     ShippingFormComponent
@@ -53,6 +53,7 @@ import {SharedModule} from "./shared/shared.module";
     imports: [
         BrowserModule,
       SharedModule,
+      AdminModule,
         NgbModule,
         FormsModule,
         ReactiveFormsModule,
@@ -92,7 +93,7 @@ import {SharedModule} from "./shared/shared.module";
         DataTablesModule
     ],
   providers: [
-    AdminAuthGuard
+
   ],
   bootstrap: [AppComponent]
 })
