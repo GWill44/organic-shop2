@@ -4,6 +4,7 @@ import {AppUser} from "../../../shared/models/app-user";
 import {ShoppingCartService} from "../../../shared/services/shopping-cart.service";
 import {ShoppingCart} from "../../../shared/models/shopping-cart";
 import {Observable} from "rxjs";
+import { faLeaf } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'navbar',
@@ -13,6 +14,7 @@ import {Observable} from "rxjs";
 export class NavbarComponent  {
   appUser: AppUser | undefined;
   cart$: Observable<ShoppingCart> | undefined;
+  faLeaf = faLeaf;
 
   constructor(
     private auth: AuthService,
