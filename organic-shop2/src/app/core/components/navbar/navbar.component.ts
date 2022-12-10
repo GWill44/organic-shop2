@@ -16,6 +16,7 @@ export class NavbarComponent  {
   cart$: Observable<ShoppingCart> | undefined;
   faLeaf = faLeaf;
   faShoppingCart = faShoppingCart;
+  isMenuCollapsed = true;
 
   constructor(
     private auth: AuthService,
