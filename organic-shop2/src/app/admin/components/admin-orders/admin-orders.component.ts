@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {OrderService} from "../../../shared/services/order.service";
+import {OrderAdmin} from "../../../shared/models/order-admin";
+import {Order} from "../../../shared/models/order";
+
 
 @Component({
   selector: 'app-admin-orders',
@@ -6,10 +10,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-orders.component.css']
 })
 export class AdminOrdersComponent implements OnInit {
+  adminOrders: OrderAdmin[] = []
 
-  constructor() { }
+  constructor(
+    private orderService: OrderService
+  ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.orderService.getOrders().subscribe(orders => {
+      for(let order of orders){
+        this.adminOrders.push( new OrderAdmin( order.key!, <Order>order.payload.val()))
+      }
+      console.log(this.adminOrders)
+    })
   }
 
 }

@@ -16,6 +16,7 @@ import {DataTablesModule} from "angular-datatables";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 
+
 @NgModule({
   imports: [
     CommonModule,
